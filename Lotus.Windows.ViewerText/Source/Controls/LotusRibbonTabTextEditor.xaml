@@ -1,0 +1,85 @@
+﻿<fluent:RibbonTabItem x:Class="Lotus.Windows.LotusRibbonTabTextEditor"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+		xmlns:fluent="urn:fluent-ribbon"
+		xmlns:aedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+		mc:Ignorable="d" 
+		Header="Текстовый редактор"
+		d:DesignHeight="450"
+		d:DesignWidth="800"
+		Name="ribbonTabTextEditor"
+		Loaded="OnRibbonTabTextEditor_Loaded">
+
+	<!--Открытие и сохранение-->
+	<fluent:RibbonGroupBox Name="ribbonTabTextEditorOpen" Header="Открытие и сохранение" MinWidth="160">
+		<fluent:Button x:Name="buttonOpen" Header="Открыть" Size="Large" Click="OnButtonOpen_Click"
+					   ToolTip="Открытие текстового документа"
+					   LargeIcon="pack://application:,,,/Lotus.Windows;component/Resources/Icons/Document/Oxygen_document_open_32.png"/>
+		
+		<fluent:Button x:Name="buttonSave" Header="Сохранить" Size="Large" Click="OnButtonSave_Click"
+					   ToolTip="Сохранение документа"
+					   IsEnabled="{Binding ElementName=ribbonTabTextEditor, Path=TextViewEditor.AvalonTextEditor.IsModified}"
+					   LargeIcon="pack://application:,,,/Lotus.Windows;component/Resources/Icons/Document/Oxygen_document_save_32.png"/>
+
+		<fluent:Button x:Name="buttonSaveAs" Header="Сохранить как" Size="Large" Click="OnButtonSaveAs_Click"
+					   ToolTip="Сохранение документа под новым именем"
+					   LargeIcon="pack://application:,,,/Lotus.Windows;component/Resources/Icons/Document/Oxygen_document_save_as_32.png"/>		
+		
+		<TextBlock Text="Кодировка файла" Margin="8 0 0 0"/>
+		
+		<fluent:ComboBox x:Name="comboBoxEncodings" 
+						 DisplayMemberPath="EncodingName" IsEditable="False"
+						 SelectionChanged="OnComboBoxEncodings_SelectionChanged">
+		</fluent:ComboBox>
+
+		<fluent:Button x:Name="buttonOpenNotepad" Header="Открыть в Notepad" Size="Large" Click="OnButtonOpenNotepad_Click"
+					   ToolTip="Открытие текстового документа в приложении по умолчанию"
+					   LargeIcon="pack://application:,,,/LotusWindows;component/Resources/Icons/Document/Oxygen_document_import_32.png"/>
+	</fluent:RibbonGroupBox>
+
+	<!--Копирование и вставка-->
+	<fluent:RibbonGroupBox Name="ribbonTabTextEditorCopy" Header="Копирование и вставка" MinWidth="160">
+		<fluent:Button x:Name="buttonCopy" Header="Копировать" Size="Large" Click="OnButtonCopy_Click"
+					   LargeIcon="pack://application:,,,/LotusWindows;component/Resources/Icons/Edit/Oxygen_edit_copy_32.png"/>
+		<fluent:Button x:Name="buttonPaste" Header="Вставить" Size="Large" Click="OnButtonPaste_Click"
+					   LargeIcon="pack://application:,,,/LotusWindows;component/Resources/Icons/Edit/Oxygen_edit_paste_32.png"/>
+	</fluent:RibbonGroupBox>
+
+	<!--Подсветка синтаксиса-->
+	<fluent:RibbonGroupBox Name="ribbonTabTextSyntaxHighlighting" Header="Подсветка синтаксиса" MinWidth="160">
+		<TextBlock Margin="8 0 0 0" Text="Подсветка синтаксиса"/>
+		<fluent:ComboBox Name="comboBoxSyntaxHighlighting"
+				SelectedItem="{Binding ElementName=ribbonTabTextEditor, Path=TextViewEditor.AvalonTextEditor.SyntaxHighlighting}"
+				ItemsSource="{Binding Source={x:Static aedit:HighlightingManager.Instance}, Path=HighlightingDefinitions}"
+				SelectionChanged="OnComboBoxSyntaxHighlighting_SelectionChanged"/>
+	</fluent:RibbonGroupBox>
+
+	<!--Не печатные символы-->
+	<fluent:RibbonGroupBox Name="ribbonTabTextEditorShow" Header="Не печатные символы" MinWidth="150">
+		<fluent:ToggleButton Header="Показать пробелы" Size="Middle"
+							 IsChecked="{Binding ElementName=ribbonTabTextEditor, Path=TextViewEditor.AvalonTextEditor.Options.ShowSpaces}"
+							 Icon="pack://application:,,,/LotusWindows;component/Resources/Icons/Text/Fugue_edit_space_32.png"/>
+		<fluent:ToggleButton Header="Показать табуляцию" Size="Middle"
+							 IsChecked="{Binding ElementName=ribbonTabTextEditor, Path=TextViewEditor.AvalonTextEditor.Options.ShowTabs}"
+							 Icon="pack://application:,,,/LotusWindows;component/Resources/Icons/Text/Fugue_blue_show_tab_16.png"/>
+		<fluent:ToggleButton Header="Показать конец строки" Size="Middle"
+							 IsChecked="{Binding ElementName=ribbonTabTextEditor, Path=TextViewEditor.AvalonTextEditor.Options.ShowEndOfLine}"
+							 Icon="pack://application:,,,/LotusWindows;component/Resources/Icons/Text/Fugue_blue_show_endline_16.png"/>
+	</fluent:RibbonGroupBox>
+
+	<!--Параметры отображения-->
+	<fluent:RibbonGroupBox Name="ribbonTabTextEditorView" Header="Параметры отображения" MinWidth="160">
+		<fluent:ToggleButton Header="Показать номера строк" Size="Middle" MinWidth="160"
+							 IsChecked="{Binding ElementName=ribbonTabTextEditor, Path=TextViewEditor.AvalonTextEditor.ShowLineNumbers}"
+							 Icon="pack://application:,,,/LotusWindows;component/Resources/Icons/Text/Fugue_blue_document_number_16.png"/>
+		<fluent:ToggleButton Header="Перенос по словам" Size="Middle" Width="160"
+							 IsChecked="{Binding ElementName=ribbonTabTextEditor, Path=TextViewEditor.AvalonTextEditor.WordWrap}"
+							 Icon="pack://application:,,,/LotusWindows;component/Resources/Icons/Text/Fugue_blue_wordwrap_16.png"/>
+		<fluent:ToggleButton Header="Показать границу" Size="Middle" MinWidth="160"
+							 IsChecked="{Binding ElementName=ribbonTabTextEditor, Path=TextViewEditor.AvalonTextEditor.Options.ShowColumnRuler}"
+							 Icon="pack://application:,,,/LotusWindows;component/Resources/Icons/Table/Fatcow_border_2_right_32.png"/>
+	</fluent:RibbonGroupBox>
+
+</fluent:RibbonTabItem>

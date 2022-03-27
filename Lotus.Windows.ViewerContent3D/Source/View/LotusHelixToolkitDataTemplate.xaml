@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:local="clr-namespace:Lotus.Windows"
+					xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+					xmlns:hxscene="clr-namespace:HelixToolkit.SharpDX.Core.Model.Scene;assembly=HelixToolkit.SharpDX.Core">
+	
+	<!--ШАБЛОНЫ-->
+	<!--Шаблон для сцены-->
+	<HierarchicalDataTemplate x:Key="SceneHelixKey" DataType="{x:Type hxscene:SceneNode}" ItemsSource="{Binding Path=Items}">
+		<StackPanel Orientation="Horizontal">
+			<Image Margin="2" Width="16" Height="16" Source="pack://application:,,,/Lotus.Windows;component/Resources/Icons/3D/mod3d_root_16.png"/>
+			<TextBlock Margin="4" Text="{Binding Path=Name}"/>
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+	<!--Шаблон для узла-->
+	<HierarchicalDataTemplate x:Key="NodeHelixKey" DataType="{x:Type hxscene:GroupNode}" ItemsSource="{Binding Path=Items}">
+		<StackPanel Orientation="Horizontal">
+			<Image Margin="2" Width="16" Height="16" Source="pack://application:,,,/Lotus.Windows;component/Resources/Icons/3D/mod3d_root_16.png"/>
+			<TextBlock Margin="4, 0" Text="{Binding Path=Name}"/>
+			<TextBlock Margin="4, 0" Text="{Binding Path=ModelMatrix}"/>
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+	<!--Шаблон для модели-->
+	<HierarchicalDataTemplate x:Key="ModelHelixKey" DataType="{x:Type hxscene:MeshNode}" ItemsSource="{Binding Path=Items}">
+		<StackPanel Orientation="Horizontal">
+			<Image Margin="2" Width="16" Height="16" Source="pack://application:,,,/Lotus.Windows;component/Resources/Icons/3D/mod3d_boundbox_16.png"/>
+			<TextBlock Margin="4, 0" Text="{Binding Path=Name}"/>
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+	<!--Шаблон для неизвестного узда-->
+	<HierarchicalDataTemplate x:Key="UnknowHelixKey" DataType="{x:Type hxscene:MeshNode}" ItemsSource="{Binding Path=Items}">
+		<StackPanel Orientation="Horizontal">
+			<TextBlock Margin="4, 0" Text="Неизвестный узел"/>
+			<TextBlock Margin="4, 0" Text="{Binding Path=Name}"/>
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+
+	<!-- СЕЛЕКТОР ШАБЛОНА -->
+	<local:CHelixToolkitDataSelector x:Key="HelixToolkitDataSelectorKey"
+				Scene ="{StaticResource SceneHelixKey}"
+				Node="{StaticResource NodeHelixKey}"
+				Model="{StaticResource ModelHelixKey}"
+				Unknow="{StaticResource UnknowHelixKey}"/>
+</ResourceDictionary>

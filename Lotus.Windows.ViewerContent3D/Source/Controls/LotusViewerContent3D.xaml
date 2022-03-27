@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Lotus.Windows.LotusViewerContent3D"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+			mc:Ignorable="d" 
+			x:Name="viewer3D"
+			d:DesignHeight="300" 
+			 d:DesignWidth="300">
+	<hx:Viewport3DX
+            x:Name="helix3DViewer"
+            BackgroundColor="LightGray"
+            Camera="{Binding ElementName=viewer3D, Path=Camera}"
+            CameraMode="Inspect"
+            CameraRotationMode="Turntable"
+            EffectsManager="{Binding ElementName=viewer3D, Path=EffectsManager}"
+            EnableSwapChainRendering="True"
+			ShowCameraInfo="True"
+			ShowCameraTarget="True"
+			ShowCoordinateSystem="True"
+			ShowFrameDetails="True"			
+            FXAALevel="Low">
+		<hx:Viewport3DX.InputBindings>
+			<KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
+			<KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
+			<KeyBinding Key="U" Command="hx:ViewportCommands.TopView" />
+			<KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
+			<KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
+			<KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
+			<KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
+			<MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
+			<MouseBinding Command="hx:ViewportCommands.Zoom" Gesture="MiddleClick" />
+			<MouseBinding Command="hx:ViewportCommands.Pan" Gesture="LeftClick" />
+		</hx:Viewport3DX.InputBindings>
+		<hx:AmbientLight3D Color="Black" />
+		<hx:DirectionalLight3D Direction="{Binding ElementName=viewer3D, Path=Camera.LookDirection}" Color="#D6D6D6" />
+		<hx:Element3DPresenter Content="{Binding ElementName=viewer3D, Path=GroupModel}" />
+		<hx:PostEffectMeshBorderHighlight EffectName="highlight" />
+
+		<hx:LineGeometryModel3D
+					x:Name="gridModel3D"
+					Geometry="{Binding ElementName=viewer3D, Path=GridGeometry}"
+					Smoothness="2"
+					Thickness="2"
+					Transform="{Binding ElementName=viewer3D, Path=GridTransform}"
+					Color="{Binding ElementName=viewer3D, Path=GridColor}" />
+	</hx:Viewport3DX>
+</UserControl>

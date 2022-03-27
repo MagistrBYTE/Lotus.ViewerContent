@@ -1,0 +1,85 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Authors>MagistrBYTE aka DanielDem</Authors>
+    <Copyright>MagistrBYTE aka DanielDem</Copyright>
+    <Company>LotusPlatform</Company>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\Output\Debug\</OutputPath>
+    <DefineConstants>TRACE;USE_HELIX;FBXSDK_RUNTIME;USE_WINDOWS;USE_ASSIMP</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\Output\Release\</OutputPath>
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Source\AutodeskFBX\**" />
+    <EmbeddedResource Remove="Source\AutodeskFBX\**" />
+    <None Remove="Source\AutodeskFBX\**" />
+    <Page Remove="Source\AutodeskFBX\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Base\LotusObject3DBase.cs" Link="Source\Object3D\Base\LotusObject3DBase.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Base\LotusObject3DEntity.cs" Link="Source\Object3D\Base\LotusObject3DEntity.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Base\LotusObject3DNode.cs" Link="Source\Object3D\Base\LotusObject3DNode.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Extension\LotusObject3DAssimpExtension.cs" Link="Source\Object3D\Extension\LotusObject3DAssimpExtension.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Material\LotusObject3DMaterial.cs" Link="Source\Object3D\Material\LotusObject3DMaterial.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Common\LotusMesh3D.cs" Link="Source\Object3D\Mesh\Common\LotusMesh3D.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Common\LotusMesh3DCommon.cs" Link="Source\Object3D\Mesh\Common\LotusMesh3DCommon.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Common\LotusMesh3DEdge.cs" Link="Source\Object3D\Mesh\Common\LotusMesh3DEdge.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Common\LotusMesh3DGeneration.cs" Link="Source\Object3D\Mesh\Common\LotusMesh3DGeneration.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Common\LotusMesh3DTriangle.cs" Link="Source\Object3D\Mesh\Common\LotusMesh3DTriangle.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Common\LotusMesh3DVertex.cs" Link="Source\Object3D\Mesh\Common\LotusMesh3DVertex.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Planar\LotusMesh3DPlanar.cs" Link="Source\Object3D\Mesh\Planar\LotusMesh3DPlanar.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Planar\LotusMesh3DPlanarEllipse.cs" Link="Source\Object3D\Mesh\Planar\LotusMesh3DPlanarEllipse.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Planar\LotusMesh3DPlanarGrid.cs" Link="Source\Object3D\Mesh\Planar\LotusMesh3DPlanarGrid.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Planar\LotusMesh3DPlanarQuad.cs" Link="Source\Object3D\Mesh\Planar\LotusMesh3DPlanarQuad.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Planar\LotusMesh3DPlanarTriangle.cs" Link="Source\Object3D\Mesh\Planar\LotusMesh3DPlanarTriangle.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Primitive\LotusMesh3DPrimitiveCylinder.cs" Link="Source\Object3D\Mesh\Primitive\LotusMesh3DPrimitiveCylinder.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Mesh\Primitive\LotusMesh3DPrimitiveSphere.cs" Link="Source\Object3D\Mesh\Primitive\LotusMesh3DPrimitiveSphere.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Model\LotusObject3DModel.cs" Link="Source\Object3D\Model\LotusObject3DModel.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Scene\LotusObject3DScene.cs" Link="Source\Object3D\Scene\LotusObject3DScene.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Texture\LotusObject3DTexture.cs" Link="Source\Object3D\Texture\LotusObject3DTexture.cs" />
+    <Compile Include="..\..\..\Unity\Assets\Lotus.Object3D\Runtime\Texture\LotusObject3DTextureSlot.cs" Link="Source\Object3D\Texture\LotusObject3DTextureSlot.cs" />
+  </ItemGroup>  
+
+  <ItemGroup>
+    <PackageReference Include="AssimpNet" Version="5.0.0-beta1" />
+    <PackageReference Include="Fluent.Ribbon" Version="9.0.4" />
+    <PackageReference Include="HelixToolkit" Version="2.20.2" />
+    <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.20.2" />
+    <PackageReference Include="HelixToolkit.SharpDX.Assimp" Version="2.20.2" />
+    <PackageReference Include="HelixToolkit.SharpDX.Core.Wpf" Version="2.20.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Source\Object3D\Base\" />
+    <Folder Include="Source\Object3D\Extension\" />
+    <Folder Include="Source\Object3D\Material\" />
+    <Folder Include="Source\Object3D\Mesh\Common\" />
+    <Folder Include="Source\Object3D\Mesh\Planar\" />
+    <Folder Include="Source\Object3D\Mesh\Primitive\" />
+    <Folder Include="Source\Object3D\Scene\" />
+    <Folder Include="Source\Object3D\Model\" />
+    <Folder Include="Source\Object3D\Texture\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Library\Lotus.Windows\Lotus.Windows.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Source\View\LotusHelixToolkitDataTemplate.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

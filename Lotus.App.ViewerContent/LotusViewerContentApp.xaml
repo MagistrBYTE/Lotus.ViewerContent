@@ -1,0 +1,24 @@
+﻿<Application x:Class="Lotus.EditorContentApp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Lotus"
+             StartupUri="LotusViewerContentMainWindow.xaml">
+    <Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+
+				<!--Обязательно погружаем ресурсы для Fluent-->
+				<ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
+
+				<!--Обязательно погружаем ресурсы для дополнительных элементов управления-->
+				<ResourceDictionary Source="pack://application:,,,/Lotus.Windows;Component/Themes/Generic.xaml" />
+
+				<ResourceDictionary Source="pack://application:,,,/Lotus.Windows;Component/Themes/Generic.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/Lotus.Windows.ViewerContent3D;Component/Themes/Generic.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/Lotus.Windows.ViewerImage;Component/Themes/Generic.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/Lotus.Windows.ViewerText;Component/Themes/Generic.xaml" />
+
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>
